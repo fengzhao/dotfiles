@@ -50,3 +50,10 @@ require('indent_blankline').setup({
   show_current_context_start = false,
 })
 -- end indent-blankline }}}
+
+if vim.version().minor > 9 then
+  require('smear_cursor').setup({
+    enabled=true,
+    cursor_color="#d133ff"
+  })
+end

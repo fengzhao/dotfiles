@@ -144,7 +144,7 @@ require('lspconfig')['csharp_ls'].setup({
 })
 
 -- Typescript
-require('lspconfig')['tsserver'].setup({})
+require('lspconfig')['ts_ls'].setup({})
 
 -- Rust
 require('lspconfig')['rust_analyzer'].setup({
@@ -257,3 +257,7 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 --- }}}
+
+-- Symbols Outline {{{
+require("outline").setup{}
+-- }}}
