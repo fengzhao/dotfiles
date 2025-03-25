@@ -22,6 +22,7 @@ call plug#begin('~/.config/nvim/plugs')
 Plug 'NLKNguyen/papercolor-theme' "My favorite colorscheme.
 Plug 'pappasam/papercolor-theme-slim'  "for 0.10+
 Plug 'olimorris/onedarkpro.nvim'
+Plug 'EdenEast/nightfox.nvim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } "Famous file explorer plugin, lazy load on comand NERDTreeToggle
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' } "NERDTree plugin which shows git status flags, lazy load on comand NERDTreeToggle
 Plug 'nvim-lualine/lualine.nvim' "lua version statusline.
@@ -41,7 +42,6 @@ Plug 'tpope/vim-fugitive' "Git plugin.
 Plug 'lukas-reineke/indent-blankline.nvim', { 'tag': 'v2.20.8' } "Indent guides for Neovim
 Plug 'nvimtools/none-ls.nvim'
 Plug 'nvimtools/none-ls-extras.nvim'
-Plug 'sphamba/smear-cursor.nvim'
 "Completion & LSP (language protocol server).
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-vsnip', { 'branch': 'main' }
@@ -51,10 +51,11 @@ Plug 'hrsh7th/nvim-cmp', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
 "ray-x/lsp_signature.nvim is slow, with poor performance...
 "I use another lightweight-but-fast alternative.
-Plug 'erhickey/sig-window-nvim'
+"Plug 'erhickey/sig-window-nvim'
+Plug 'hit9/sig-window-nvim', { 'branch': 'split-lines-before-nvim_buf_set_lines' }
 Plug 'Decodetalkers/csharpls-extended-lsp.nvim', { 'for': 'cs' }
 Plug 'hedyhli/outline.nvim'  "Code outline sidebar powered by LSP.
-"Plug 'hit9/bitproto', { 'rtp': 'editors/vim', 'for': 'bitproto' }
+Plug 'hit9/bitproto', { 'rtp': 'editors/vim', 'for': 'bitproto' }
 "C/C++
 Plug 'https://git.sr.ht/~p00f/godbolt.nvim' "Godbolt - CompilerExplorer
 Plug 'skywind3000/vim-cppman', { 'for': 'cpp' }
@@ -185,7 +186,8 @@ set background=dark "Using dark. Hmm dark is sexy.
 
 "Basic :: Color :: PaperColor ------- {{{
 if has("nvim-0.10.0")
-  colorscheme PaperColorSlim
+  "colorscheme PaperColorSlim
+  colorscheme nordfox
 else
   let g:PaperColor_Theme_Options = {
     \   'theme': {
