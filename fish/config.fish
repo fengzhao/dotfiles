@@ -38,6 +38,7 @@ set -gx fish_user_paths \
     /opt/homebrew/opt/n/bin \
     $GOPATH/bin \
     $HOME/.cargo/bin \
+    $HOME/.dotnet/tools \
     /opt/homebrew/bin \
     $N_PREFIX/bin \
     /usr/local/sbin \
@@ -54,6 +55,11 @@ set -x XDG_CONFIG_HOME $HOME/.config
 # oo (Go version manager)
 # https://github.com/hit9/oo
 source $HOME/.oo/env.fish
+
+# Swiftly
+set -x SWIFTLY_HOME_DIR "/Users/hit9/.swiftly"
+set -x SWIFTLY_BIN_DIR "/Users/hit9/.swiftly/bin"
+set -x PATH "$SWIFTLY_BIN_DIR" $PATH
 
 # homebrew
 # disable auto updates.
@@ -130,7 +136,7 @@ function dotenv --description 'Load environment variables from .env file'
 
         # Insert dotenv prefix to prompt
         function _pure_prompt  --inherit-variable envfile --argument-names exit_code
-            if set -q __DOTENV_ACTIVATE 
+            if set -q __DOTENV_ACTIVATE
                 echo -n -s (set_color green) "(" $envfile ")" (set_color normal) " "
             end
             _old_pure_prompt $exit_code
