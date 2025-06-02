@@ -209,6 +209,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', function()
       vim.lsp.buf.hover()
     end, { silent = true, buffer = true })
+    ---- grn: rename 
+    vim.keymap.set('n', 'grn', function()
+      vim.lsp.buf.rename()
+    end, { silent = true, buffer = true })
 
     -- End lsp key mapping }}}
 
