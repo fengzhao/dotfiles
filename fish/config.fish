@@ -33,7 +33,6 @@ set -x N_PREFIX $HOME/.n
 set -e fish_user_paths
 set -gx fish_user_paths \
     $HOME/.pyenv/shims \
-    /opt/homebrew/opt/llvm/bin \
     /opt/homebrew/opt/ruby/bin \
     /opt/homebrew/opt/n/bin \
     $GOPATH/bin \
@@ -60,6 +59,9 @@ source $HOME/.oo/env.fish
 set -x SWIFTLY_HOME_DIR "/Users/hit9/.swiftly"
 set -x SWIFTLY_BIN_DIR "/Users/hit9/.swiftly/bin"
 set -x PATH "$SWIFTLY_BIN_DIR" $PATH
+
+# USE LLVM from Homebrew
+set -x PATH "/opt/homebrew/opt/llvm/bin" $PATH
 
 # homebrew
 # disable auto updates.
