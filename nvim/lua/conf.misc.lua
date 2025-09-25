@@ -129,3 +129,12 @@ require('smear_cursor').setup({
   distance_stop_animating = 0.5,
 })
 -- end sphamba/smear-cursor.nvim }}}
+
+-- Plugin nvim-zh/colorful-winsep.nvim {{{
+require('colorful-winsep').setup({
+  border = 'single', -- "single", "rounded", "bold" and "double".
+  excluded_ft = { 'packer', 'TelescopePrompt', 'mason' },
+  highlight = nil, -- nil|string|function. See the docs's Highlights section
+  animate = { enabled = false },
+})
+-- Plugin nvim-zh/colorful-winsep.nvim }}}

@@ -34,6 +34,7 @@ Plug 'junegunn/fzf.vim' "Fzf vim plugin.
 Plug 'mhinz/vim-signify' "Show diff signs for file changes under git/hg/svn control.
 Plug 'simeji/winresizer' "Window resizer.
 Plug 'troydm/zoomwintab.vim' "Window zoom.
+Plug 'nvim-zh/colorful-winsep.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'sphamba/smear-cursor.nvim'
 Plug 'sindrets/diffview.nvim', { 'branch': 'main' } "Vimdiff with a files navigator.
