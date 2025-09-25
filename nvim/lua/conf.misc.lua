@@ -114,5 +114,18 @@ apply_ibl_palette('nord')
 
 require('ibl').setup({
   indent = { highlight = highlight, char = '▏' }, -- char 可以选: ▏, ┊
+  scope = {
+    show_start = false,
+    show_end = false,
+  },
 })
 -- end indent-blankline }}}
+
+-- Plugin sphamba/smear-cursor.nvim {{{
+require('smear_cursor').setup({
+  cursor_color = '#C24DF0',
+  stiffness = 0.8,
+  trailing_stiffness = 0.5,
+  distance_stop_animating = 0.5,
+})
+-- end sphamba/smear-cursor.nvim }}}

@@ -35,6 +35,7 @@ Plug 'mhinz/vim-signify' "Show diff signs for file changes under git/hg/svn cont
 Plug 'simeji/winresizer' "Window resizer.
 Plug 'troydm/zoomwintab.vim' "Window zoom.
 Plug 'nvim-lua/plenary.nvim'
+Plug 'sphamba/smear-cursor.nvim'
 Plug 'sindrets/diffview.nvim', { 'branch': 'main' } "Vimdiff with a files navigator.
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Syntax highlighting for variety filetypes.
 Plug 'dohsimpson/vim-macroeditor' "Edito macro => :MacroEdit a
