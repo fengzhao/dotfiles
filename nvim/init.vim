@@ -39,7 +39,7 @@ Plug 'sindrets/diffview.nvim', { 'branch': 'main' } "Vimdiff with a files naviga
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Syntax highlighting for variety filetypes.
 Plug 'dohsimpson/vim-macroeditor' "Edito macro => :MacroEdit a
 Plug 'tpope/vim-fugitive' "Git plugin.
-Plug 'lukas-reineke/indent-blankline.nvim', { 'tag': 'v2.20.8' } "Indent guides for Neovim
+Plug 'lukas-reineke/indent-blankline.nvim' "Indent guides for Neovim
 Plug 'nvimtools/none-ls.nvim'
 Plug 'nvimtools/none-ls-extras.nvim'
 "Completion & LSP (language protocol server).
@@ -52,7 +52,7 @@ Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
 "ray-x/lsp_signature.nvim is slow, with poor performance...
 "I use another lightweight-but-fast alternative.
 "Plug 'erhickey/sig-window-nvim'
-Plug 'hit9/sig-window-nvim', { 'branch': 'split-lines-before-nvim_buf_set_lines' }
+Plug 'hit9/sig-window-nvim'
 Plug 'Decodetalkers/csharpls-extended-lsp.nvim', { 'for': 'cs' }
 Plug 'hedyhli/outline.nvim'  "Code outline sidebar powered by LSP.
 Plug 'hit9/bitproto', { 'rtp': 'editors/vim', 'for': 'bitproto' }
@@ -119,7 +119,7 @@ set incsearch "Realtime search results showing.
 "Encoding (utf8)
 set encoding=utf-8
 set fencs=utf-8 "Encoding that creating new files.
-set termencoding=utf-8 "Encoding that output to terminal.
+"set termencoding=utf-8 "Encoding that output to terminal.
 set fileencoding=utf-8 "Encoding that saving files.
 set backspace=indent,eol,start "Backspace key, I just don't rely on it.
 
