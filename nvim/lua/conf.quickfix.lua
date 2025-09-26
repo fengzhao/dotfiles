@@ -1,65 +1,67 @@
--- vim: foldmethod=marker foldenable
--- vim: tabstop=2 softtabstop=2 shiftwidth=2
+-- Quickfix
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local grp = vim.api.nvim_create_augroup('DiagLoclistRefresh_' .. ev.buf, { clear = true })
 
--- Add Diagnostics to Quickfix Window.
--- https://github.com/neovim/nvim-lspconfig/issues/69
-
--- global switch:whether enable pushing diagnostics to quickfix window.
-vim.g._enable_push_diagnostics_to_quickfix = false
-
--- Push diagnostics info to quickfix window.
-local push_diagnostics_to_quickfix = function(diagnostics)
-  local qflist = {}
-  for bufnr, diagnostic in pairs(diagnostics) do
-    for _, d in ipairs(diagnostic) do
-      d.bufnr = bufnr
-      d.lnum = d.range.start.line + 1
-      d.col = d.range.start.character + 1
-      d.text = d.message
-      table.insert(qflist, d)
+    -- helper：当前窗口的 loclist 是否可见
+    local function loclist_visible(win)
+      local info = vim.fn.getloclist(win, { winid = 1 })
+      return info and info.winid and info.winid ~= 0
     end
-  end
-  -- setqflist to add all diagnostics to the quickfix list.
-  -- setloclist to add buffer diagnostics to the location list.
-  vim.diagnostic.setloclist(qflist)
-end
 
--- Register a handler to push diagnostics to quickfix window if new diagnostics occurs.
-local publish_diagnostics_method = 'textDocument/publishDiagnostics'
-local default_diagnostics_handler = vim.lsp.handlers[publish_diagnostics_method]
+    -- 刷新当前窗口的 loclist
+    -- open_mode: 'visible' 仅在已打开时保持打开；'always' 总是打开
+    local function refresh_loclist(open_mode)
+      -- 在 qf/loclist 窗口里不要刷新，避免打断 <CR>
+      if vim.bo.filetype == 'qf' then
+        return
+      end
+      local win = vim.api.nvim_get_current_win()
+      local should_open = (open_mode == 'always') or (open_mode == 'visible' and loclist_visible(win))
+      -- 关键：绑定 owner 到“当前窗口”，避免 <CR> 跳错
+      vim.diagnostic.setloclist({ open = should_open, winnr = win })
+    end
 
-vim.lsp.handlers[publish_diagnostics_method] = function(err, method, result, client_id, bufnr, config)
-  default_diagnostics_handler(err, method, result, client_id, bufnr, config)
-  if vim.g._enable_push_diagnostics_to_quickfix then
-    local diagnostics = vim.diagnostic.get()
-    push_diagnostics_to_quickfix(diagnostics)
-  end
-end
+    -- buf-local 的 :Quickfix 命令（可选严重级别）
+    vim.api.nvim_buf_create_user_command(ev.buf, 'Quickfix', function(opts)
+      local win = vim.api.nvim_get_current_win()
+      local sev
+      if opts.args ~= '' then
+        local S = vim.diagnostic.severity
+        sev = ({ ERROR = S.ERROR, WARN = S.WARN, INFO = S.INFO, HINT = S.HINT })[string.upper(opts.args)]
+      end
+      vim.diagnostic.setloclist({ open = true, winnr = win, severity = sev })
+    end, {
+      desc = 'Diagnostics -> location list (current window)',
+      nargs = '?',
+      complete = function()
+        return { 'ERROR', 'WARN', 'INFO', 'HINT' }
+      end,
+    })
 
--- Disable push diagnostics to quickfix.
-local disable_push_diagnostics = function()
-  -- Quickfix window's id.
-  local qf_winid = vim.fn.getloclist(win, { winid = 0 }).winid
-  if qf_winid > 0 then
-    -- Disable quickfix automatically if quickwindow is closed.
-    vim.g._enable_push_diagnostics_to_quickfix = false
-  end
-end
+    -- 自动刷新：仅在 loclist 已打开时刷新
+    vim.api.nvim_create_autocmd('DiagnosticChanged', {
+      group = grp,
+      callback = function(a)
+        if a.buf ~= ev.buf then
+          return
+        end -- 只处理本 buffer 的诊断变化
+        refresh_loclist('visible')
+      end,
+    })
 
--- Disable push diagnostics to quickfix if Quickfix window disapper.
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'qf',
-  callback = function(args)
-    vim.api.nvim_create_autocmd('BufWinLeave', { buffer = args.buf, callback = disable_push_diagnostics })
+    vim.api.nvim_create_autocmd('BufWritePost', {
+      group = grp,
+      buffer = ev.buf, -- 只在本 buffer 保存后刷新
+      callback = function()
+        refresh_loclist('visible')
+      end,
+    })
+
+    -- 如需离开/切换窗口也刷新，可加（注意保留 filetype==qf 的保护）
+    -- vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+    --   group = grp, buffer = ev.buf,
+    --   callback = function() refresh_loclist('visible') end,
+    -- })
   end,
 })
-
--- Call :Quickfix to enter a quickfix window for all diagnostics under current buffer.
-vim.api.nvim_create_user_command('Quickfix', function(opts)
-  vim.g._enable_push_diagnostics_to_quickfix = true
-  -- Push at once if diagnostics is not empty.
-  local diagnostics = vim.diagnostic.get()
-  if next(diagnostics) ~= nil then
-    push_diagnostics_to_quickfix(diagnostics)
-  end
-end, {})
