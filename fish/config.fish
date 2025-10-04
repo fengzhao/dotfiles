@@ -60,6 +60,9 @@ set -x SWIFTLY_HOME_DIR "/Users/hit9/.swiftly"
 set -x SWIFTLY_BIN_DIR "/Users/hit9/.swiftly/bin"
 set -x PATH "$SWIFTLY_BIN_DIR" $PATH
 
+# USE LLVM from Homebrew
+set -x PATH "/opt/homebrew/opt/llvm/bin" $PATH
+
 # homebrew
 # disable auto updates.
 set -x HOMEBREW_NO_AUTO_UPDATE 1
