@@ -395,3 +395,4 @@ luafile ~/.config/nvim/lua/conf.quickfix.lua
 luafile ~/.config/nvim/lua/conf.statusline.lua
 luafile ~/.config/nvim/lua/conf.misc.lua
 luafile ~/.config/nvim/lua/conf.skip.lua
+luafile ~/.config/nvim/lua/conf.python.lua
