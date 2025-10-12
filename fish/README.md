@@ -26,7 +26,7 @@ References:
 * fish shell: https://fishshell.com
 * fisher plugin manager: https://github.com/jorgebucaran/fisher
 * colorscheme: https://github.com/pure-fish/pure
-* blog (chinese): https://writings.sh/post/commandline-tools#shell--fish
+* blog (chinese): https://hit9.dev/post/commandline-tools#shell--fish
 
 Commandline tools:
 
