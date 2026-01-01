@@ -38,8 +38,8 @@ Plug 'nvim-zh/colorful-winsep.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'sphamba/smear-cursor.nvim'
 Plug 'sindrets/diffview.nvim', { 'branch': 'main' } "Vimdiff with a files navigator.
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Syntax highlighting for variety filetypes.
-Plug 'rrethy/nvim-treesitter-textsubjects'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'branch': 'master'} "Syntax highlighting for variety filetypes.
+Plug 'RRethy/nvim-treesitter-textsubjects'
 Plug 'dohsimpson/vim-macroeditor' "Edito macro => :MacroEdit a
 Plug 'tpope/vim-fugitive' "Git plugin.
 Plug 'lukas-reineke/indent-blankline.nvim' "Indent guides for Neovim

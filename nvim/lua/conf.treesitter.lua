@@ -1,6 +1,26 @@
 require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
+    ensure_installed = {
+      'c',
+      'cpp',
+      'c_sharp',
+      'python',
+      'javascript',
+      'html',
+      'css',
+      'typescript',
+      'go',
+      'lua',
+      'dart',
+      'rust',
+      'toml',
+      'vim',
+      'vimdoc',
+      'query',
+      'markdown',
+      'markdown_inline',
+    },
     additional_vim_regex_highlighting = false,
     -- disable slow treesitter highlight for large files
     disable = function(lang, buf)
