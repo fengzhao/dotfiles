@@ -1,3 +1,5 @@
+[general]
+
 live_config_reload = true
 
 [bell]
@@ -154,7 +156,7 @@ multiplier = 3
 save_to_clipboard = false
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
-[shell]
+[terminal.shell]
 program = "/usr/local/bin/fish"
 
 [window]
@@ -166,3 +168,5 @@ startup_mode = "Maximized"
 [window.padding]
 x = 2
 y = 2
+
+[terminal]
